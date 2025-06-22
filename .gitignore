@@ -1,0 +1,18 @@
+# Node.js
+/frontend/node_modules
+/frontend/dist
+
+# PHP
+/vendor
+
+# Mac/OSX
+.DS_Store
+
+# Logs
+*.log
+
+# Docker
+**/.env
+
+# Vite
+frontend/.vite
