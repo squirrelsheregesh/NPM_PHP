@@ -1,0 +1,34 @@
+name: CI Build # Имя workflow на GitHub
+
+on:
+  push: # Запускать на пуш
+    branches: [ "master" ] # Только на main
+  pull_request: # И на PR в main
+
+jobs:
+  build: # Имя джоба
+    runs-on: ubuntu-latest # Официальный образ Ubuntu для сборки
+
+    steps:
+    - uses: actions/checkout@v4 # Шаг: клонировать репозиторий
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4 # Установить Node.js
+      with:
+        node-version: '20' # Версия Node
+
+    - name: Install frontend dependencies
+      working-directory: frontend
+      run: npm install # Установить npm зависимости
+
+    - name: Build frontend
+      working-directory: frontend
+      run: npm run build # Собрать фронтенд (vite)
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2 # Подключить PHP
+      with:
+        php-version: '8.2' # Версия PHP
+
+    - name: Validate PHP files
+      run: php -l backend/index.php # Проверить синтаксис PHP
