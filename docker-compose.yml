@@ -5,7 +5,8 @@ services:
     image: node:20
     working_dir: /app
     volumes:
-      - ./frontend:/app
+      - ./frontend/dist:/var/www/frontend
+      #- ./frontend:/app
     command: sh -c "npm install && npm run build"
 
   php:
